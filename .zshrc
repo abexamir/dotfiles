@@ -133,3 +133,5 @@ alias h='cd ~/workspace/hamravesh'
 alias warp='warp-cli enable-always-on && warp-cli connect 2>/dev/null'
 alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
 
+# vim mode
+set -o vi
