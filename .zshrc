@@ -115,15 +115,15 @@ if [ -x "$(command -v exa)" ]; then
     alias la="exa --long --all --group"
 fi
 
-alias k=kubectl
 alias curl=curlie
 alias cat=bat
 alias ls=exa
 alias x="xsel -ib"
+alias rm='rm -i'
 compdef __start_kubectl k
 
 export PATH="${PATH}:${HOME}/.krew/bin"
-
+export EDITOR=vim
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
@@ -132,8 +132,11 @@ alias python=python3
 alias h='cd ~/workspace/hamravesh'
 alias warp='warp-cli enable-always-on && warp-cli connect 2>/dev/null'
 alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
-
-alias wgd='(wg-quick down $WIREGUARD_PROFILE)'
-alias wgu='(wg-quick up $WIREGUARD_PROFILE)'
+#wireguard
+export WG_PROFILE='garuda'
+alias wgd='(wg-quick down $WG_PROFILE)'
+alias wgu='(wg-quick up $WG_PROFILE)'
 # vim mode
 set -o vi
+#fuck
+#eval $(thefuck --alias)
