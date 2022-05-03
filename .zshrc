@@ -14,7 +14,7 @@ if [ -x "$(command -v exa)" ]; then
     alias la="exa --long --all --group"
 fi
 
-#general aliases
+# general aliases
 alias curl=curlie
 alias cat=bat
 alias ls=exa
@@ -27,27 +27,28 @@ alias h='cd ~/workspace/hamravesh'
 alias p='cd ~/workspace/personal'
 compdef __start_kubectl k
 
-#krew
+# krew
 export PATH="${PATH}:${HOME}/.krew/bin"
 
-#default editor
+# default editor
 export EDITOR=vim
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-#wireguard
+# wireguard
 export WG_PROFILE='garuda'
 alias wgd='(wg-quick down $WG_PROFILE)'
 alias wgu='(wg-quick up $WG_PROFILE)'
 
-#rust
+# rust
 source $HOME/.cargo/env
 
 # vim mode
 set -o vi
+bindkey '^R' history-incremental-search-backward
 
-#fuck
+# fuck
 eval $(thefuck --alias)
 
 autoload -U compinit; compinit
