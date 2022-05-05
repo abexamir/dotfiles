@@ -1,0 +1,43 @@
+ls /sys/firmware/efi/efivars
+#check network
+fdisk -l 
+cfdisk /dev/sdX
+
+#mkfs.fat -F32 for efi #mkfs.ext4 #mkswp
+
+
+mount /dev/sda3 /mnt #root partition
+mkdir /mnt/efi
+mkdir /mnt/home
+mount /dev/sda1 /mnt/efi
+mount /dev/sda4 /mnt/home
+swapon /dev/sda2
+
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
+pacstrap /mnt/ base linux linux-firmware net-tools networkmanager openssh vim git
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+cat /mnt/etc/fstab
+
+
+arch-chroot /mnt
+
+vim /etc/locale.gen #uncomment en_US.UTF-8
+locale-gen
+echo "LANG=en_US.UTF-8"  > /etc/locale.conf
+
+ln -sf /usr/share/zoneinfo/US/Central /etc/localtime #set timezone
+hwclock --systohc --utc
+echo "work-hr" > /etc/hostname
+passwd
+
+pacman -S grub efibootmgr
+grub-install --efi--directory=/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+
+exit
+reboot
+
