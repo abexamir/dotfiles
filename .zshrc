@@ -52,3 +52,6 @@ bindkey '^R' history-incremental-search-backward
 eval $(thefuck --alias)
 
 autoload -U compinit; compinit
+
+export TERM=xterm-256color
+
