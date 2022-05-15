@@ -25,6 +25,13 @@ alias warp='warp-cli enable-always-on && warp-cli connect 2>/dev/null'
 alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
 alias h='cd ~/workspace/hamravesh'
 alias p='cd ~/workspace/personal'
+
+  # docker
+alias doco='docker-compose'
+alias docou='docker-compose up'
+alias docod='docker-compose down'
+alias docol='docker-compose logs'
+
 compdef __start_kubectl k
 
 # krew
