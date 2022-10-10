@@ -9,11 +9,6 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [ -x "$(command -v exa)" ]; then
-    alias ls="exa"
-    alias la="exa --long --all --group"
-fi
-
 # general aliases
 alias curl=curlie
 alias cat=bat
@@ -26,7 +21,18 @@ alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
 alias h='cd ~/workspace/hamravesh'
 alias p='cd ~/workspace/personal'
 
-  # docker
+# exa
+if [ -x "$(command -v exa)" ]; then
+    alias ls="exa"
+    alias la="exa --long --all --group"
+fi
+
+# kubecolor
+if [ -x "$(command -v kubecolor)" ]; then
+    alias kubectl="kubecolor"
+fi
+
+# docker
 alias doco='docker-compose'
 alias docou='docker-compose up'
 alias docod='docker-compose down'
