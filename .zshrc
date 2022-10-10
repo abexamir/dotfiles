@@ -3,7 +3,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 export ZSH="/home/abexamir/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=( git zsh-syntax-highlighting zsh-autosuggestions kubectl docker python )
+plugins=( git zsh-syntax-highlighting zsh-autosuggestions kubectl docker python web-search )
 source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -30,7 +30,11 @@ alias p='cd ~/workspace/personal'
 alias doco='docker-compose'
 alias docou='docker-compose up'
 alias docod='docker-compose down'
+alias docor='docker-compose restart'
 alias docol='docker-compose logs'
+
+#ipython
+alias ipython='ipython --TerminalInteractiveShell.editing_mode=vi'
 
 compdef __start_kubectl k
 
@@ -44,7 +48,7 @@ export EDITOR=vim
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 # wireguard
-export WG_PROFILE='garuda'
+export WG_PROFILE='armin'
 alias wgd='(wg-quick down $WG_PROFILE)'
 alias wgu='(wg-quick up $WG_PROFILE)'
 
@@ -62,3 +66,4 @@ autoload -U compinit; compinit
 
 export TERM=xterm-256color
 
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
