@@ -1,13 +1,15 @@
+# general confs
+plugins=( git zsh-syntax-highlighting kubectl docker python web-search kubectl-autocomplete zsh-autosuggestions )
+export ZSH="/home/abexamir/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-export ZSH="/home/abexamir/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=( git zsh-syntax-highlighting zsh-autosuggestions kubectl docker python web-search )
-source $ZSH/oh-my-zsh.sh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+autoload -U compinit; compinit
+export TERM=xterm-256color
+export PATH=$PATH:/usr/local/bin
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source $ZSH/oh-my-zsh.sh
 
 # general aliases
 alias curl=curlie
@@ -20,32 +22,43 @@ alias warp='warp-cli enable-always-on && warp-cli connect 2>/dev/null'
 alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
 alias h='cd ~/workspace/hamravesh'
 alias p='cd ~/workspace/personal'
+alias nv=nvim
 
-# exa
+# vim mode
+set -o vi
+bindkey '^R' history-incremental-search-backward
+
+# exa alias
 if [ -x "$(command -v exa)" ]; then
     alias ls="exa"
     alias la="exa --long --all --group"
 fi
 
-# kubecolor
+# kubecolor alias
 if [ -x "$(command -v kubecolor)" ]; then
     alias kubectl="kubecolor"
 fi
 
-# docker
+# kubectl-neat-diff
+export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+
+# kubectl completion
+source <(kubectl completion zsh)
+compdef __start_kubectl k
+
+# krew
+export PATH="${PATH}:${HOME}/.krew/bin"
+
+# docker aliases
 alias doco='docker-compose'
 alias docou='docker-compose up'
 alias docod='docker-compose down'
 alias docor='docker-compose restart'
 alias docol='docker-compose logs'
 
-#ipython
+# ipython vim mode alias
 alias ipython='ipython --TerminalInteractiveShell.editing_mode=vi'
 
-compdef __start_kubectl k
-
-# krew
-export PATH="${PATH}:${HOME}/.krew/bin"
 
 # default editor
 export EDITOR=vim
@@ -53,23 +66,28 @@ export EDITOR=vim
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-# wireguard
-export WG_PROFILE='armin'
+# wireguard aliases
+export WG_PROFILE='wg0'
 alias wgd='(wg-quick down $WG_PROFILE)'
 alias wgu='(wg-quick up $WG_PROFILE)'
 
 # rust
 source $HOME/.cargo/env
 
-# vim mode
-set -o vi
-bindkey '^R' history-incremental-search-backward
-
 # fuck
 eval $(thefuck --alias)
 
-autoload -U compinit; compinit
+# proxy
+#export http_proxy="http://127.0.0.1:2080"
+#export https_proxy="http://127.0.0.1:2080"
 
-export TERM=xterm-256color
+# github copilot aliases
+alias copilot="gh copilot"
+alias ghcs="gh copilot suggest"
+alias ghce="gh copilot explain"
 
-___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+# openai envs
+export OPENAI_API_KEY="KEY"
+export OPENAI_KEY=$OPENAI_API_KEY
+
+
