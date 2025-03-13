@@ -18,8 +18,9 @@ alias x="xsel -ib" alias rm='rm -i'
 alias python=python3
 alias warp='warp-cli enable-always-on && warp-cli connect 2>/dev/null'
 alias dwarp='warp-cli disconnect && warp-cli disable-always-on 2>/dev/null'
-alias h='cd ~/workspace/hamravesh'
+alias z='cd ~/workspace/zarrino'
 alias p='cd ~/workspace/personal'
+alias c='cd ~/workspace/community'
 alias nv=nvim
 
 # vim mode
@@ -74,6 +75,11 @@ export WG_PROFILE='zbook'
 alias wgd='(wg-quick down $WG_PROFILE)'
 alias wgu='(wg-quick up $WG_PROFILE)'
 
+IRANIAN_ROUTES_SCRIPT='/opt/iranroute.sh'
+
+alias dwgu='sudo sh -c "$IRANIAN_ROUTES_SCRIPT"; wg-quick up direct'
+alias dwgd='wg-quick down direct'
+
 # rust
 source $HOME/.cargo/env
 
@@ -81,8 +87,10 @@ source $HOME/.cargo/env
 eval $(thefuck --alias)
 
 # proxy
-#export http_proxy="http://127.0.0.1:2080"
-#export https_proxy="http://127.0.0.1:2080"
+export http_proxy="http://127.0.0.1:2080"
+export https_proxy="http://127.0.0.1:2080"
+alias np="unset http_proxy https_proxy"
+alias rp="export http_proxy=http://127.0.0.1:2080 https_proxy=http://127.0.0.1:2080"
 
 # github copilot aliases
 alias copilot="gh copilot"
@@ -93,4 +101,7 @@ alias ghce="gh copilot explain"
 export OPENAI_API_KEY="KEY"
 export OPENAI_KEY=$OPENAI_API_KEY
 
+# iximiuz labs
+export PATH=$PATH:/home/abexamir/.iximiuz/labctl/bin
+source <(labctl completion zsh)
 
